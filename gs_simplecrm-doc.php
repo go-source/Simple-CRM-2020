@@ -1,7 +1,7 @@
 <?php
 	
 /*
-* THis is a documentation file. No working code here.
+* This is a documentation file. No working code here.
 * 
 * @Version 2.0.0
 * @copyright  2020 Pedro Bicudo Maschio
