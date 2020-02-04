@@ -7,4 +7,4 @@ This project started in January 2020.
 --- CHANGELOG ---
 - Version starts with 2.0.0
 	Previous version was created for Joomla! 3.8 using libraries that need replacement
-	New version 2.0.0 developed for WP and later adapted for Joomla!
+	New version 2.0.0 developed for WP and later will be adapted for Joomla!
