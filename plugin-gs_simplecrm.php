@@ -45,13 +45,13 @@ if( $gs_global == 'wp' ){
  * Currently plugin version.
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'PLUGIN_NAME_VERSION', '2.0.0' );
+define( 'GS_SIMPLECRM_VERSION', '2.0.0' );
 
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-plugin-name-activator.php
  */
-function activate_plugin_name() {
+function activate_gs_simplecrm() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-gs_simplecrm-activator.php';
 	Gs_simplecrm_Activator::activate();
 }
@@ -60,7 +60,7 @@ function activate_plugin_name() {
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-plugin-name-deactivator.php
  */
-function deactivate_plugin_name() {
+function deactivate_gs_simplecrm() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-gs_simplecrm-deactivator.php';
 	Gs_simplecrm_Deactivator::deactivate();
 }
@@ -90,4 +90,31 @@ function run_gs_simplecrm() {
 
 }
 run_gs_simplecrm();
+
+/**
+ * Sets de Admin Menu.
+	add_menu_page(
+	    string $page_title,
+	    string $menu_title,
+	    string $capability,
+	    string $menu_slug,
+	    callable $function = '',
+	    string $icon_url = '',
+	    int $position = null
+	);
+ *
+ * @since    2.0.0
+ */
+	function gs_simplecrm_options_page() {
+	    add_menu_page(
+	        'GS Simple CRM Config',
+	        'Simple CRM Cfg',
+	        'manage_options',
+	        plugin_dir_path(__FILE__) . 'admin/partials/gs_simplecrm-admin-display.php',
+	        null,
+	        plugin_dir_url(__FILE__) . 'images/gs_icon.png',
+	        20
+	    );
+	}
+	add_action( 'admin_menu', 'gs_simplecrm_options_page' );
 

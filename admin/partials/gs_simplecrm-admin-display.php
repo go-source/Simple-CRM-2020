@@ -12,8 +12,25 @@
  * @author     Pedro Bicudo Maschio <bicudomaschio@gmail.com>
  * @since      2.0.0
  */
+if ( is_admin() ) {
+    // we are in admin mode
 ?>
+	<form>
+	<div class="" style="width: 80%; border-style: solid; border-radius: 10px; float: left; margin-left: 10%; " >
 
-<!-- This file should primarily consist of HTML with a little bit of PHP. -->
+		<h1>Simple CRM Admin Panel</h1>
+		
+		<div>
+			<div style="float: left">
+				<h2>Left - config options</h2>
+			</div>
+			<div style="float: right">
+				<h2>Right - user management</h2>
+			</div>
+		</div>		
+	</div>
+	</form>
+    
+<?php    }
 
-<a>Hello, from Simple CRM</a>
+

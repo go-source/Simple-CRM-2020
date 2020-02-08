@@ -13,7 +13,7 @@
  * @author     Pedro Bicudo Maschio <bicudomaschio@gmail.com>
  * @since      2.0.0
  */
- */
+
 class Gs_simplecrm {
 
 	/**
@@ -85,6 +85,7 @@ class Gs_simplecrm {
 	 * @access   private
 	 */
 	private function load_dependencies() {
+		// -------------------------------------------------> to do, loop tru and load all; and do the same for gs-classes
 
 		/**
 		 * The class responsible for orchestrating the actions and filters of the
