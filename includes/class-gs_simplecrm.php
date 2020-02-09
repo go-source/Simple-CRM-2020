@@ -1,15 +1,14 @@
 <?php
 
 /**
+ * Wordpress plugin
+ *	
  * The file that defines the core plugin class
  *
  * A class definition that includes attributes and functions used across both the
  * public-facing side of the site and the admin area.
  *
- * Wordpress plugin
- *
  * @package    gs_simplecrm
- * @subpackage gs_simplecrm/admin
  * @author     Pedro Bicudo Maschio <bicudomaschio@gmail.com>
  * @since      2.0.0
  */
@@ -25,24 +24,10 @@ class Gs_simplecrm {
 	 * @var      Gs_simplecrm_Loader    $loader    Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
-
-	/**
-	 * The unique identifier of this plugin.
-	 *
-	 * @since    2.0.0
-	 * @access   protected
-	 * @var      string    $plugin_name    The string used to uniquely identify this plugin.
-	 */
-	protected $plugin_name;
-
-	/**
-	 * The current version of the plugin.
-	 *
-	 * @since    2.0.0
-	 * @access   protected
-	 * @var      string    $version    The current version of the plugin.
-	 */
-	protected $version;
+	
+	//set admin and public views
+	protected $admin_class;
+	protected $public_class;
 
 	/**
 	 * Define the core functionality of the plugin.
@@ -54,63 +39,17 @@ class Gs_simplecrm {
 	 * @since    2.0.0
 	 */
 	public function __construct() {
-		if ( defined( 'GS_SIMPLECRM_VERSION' ) ) {
-			$this->version = GS_SIMPLECRM_VERSION;
-		} else {
-			$this->version = '2.0.0';
-		}
-		$this->plugin_name = 'gs_simplecrm';
 
-		$this->load_dependencies();
-		$this->set_locale();
-		$this->define_admin_hooks();
-		$this->define_public_hooks();
-
-	}
-
-	/**
-	 * Load the required dependencies for this plugin.
-	 *
-	 * Include the following files that make up the plugin:
-	 *
-	 * - Gs_simplecrm_Loader. Orchestrates the hooks of the plugin.
-	 * - Gs_simplecrm_i18n. Defines internationalization functionality.
-	 * - Gs_simplecrm_Admin. Defines all hooks for the admin area.
-	 * - Gs_simplecrm_Public. Defines all hooks for the public side of the site.
-	 *
-	 * Create an instance of the loader which will be used to register the hooks
-	 * with WordPress.
-	 *
-	 * @since    2.0.0
-	 * @access   private
-	 */
-	private function load_dependencies() {
-		// -------------------------------------------------> to do, loop tru and load all; and do the same for gs-classes
-
-		/**
-		 * The class responsible for orchestrating the actions and filters of the
-		 * core plugin.
-		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-gs_simplecrm-loader.php';
-
-		/**
-		 * The class responsible for defining internationalization functionality
-		 * of the plugin.
-		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-gs_simplecrm-i18n.php';
-
-		/**
-		 * The class responsible for defining all actions that occur in the admin area.
-		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-gs_simplecrm-admin.php';
-
-		/**
-		 * The class responsible for defining all actions that occur in the public-facing
-		 * side of the site.
-		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-gs_simplecrm-public.php';
-
+		//load dependencies
 		$this->loader = new Gs_simplecrm_Loader();
+
+		$this->admin_class = new Gs_simplecrm_Admin( GS_SIMPLECRM_CODENAME, GS_SIMPLECRM_VERSION );
+		
+		$this->public_class = new Gs_simplecrm_Public( GS_SIMPLECRM_CODENAME, GS_SIMPLECRM_VERSION );
+		
+		$this->set_locale();
+		$this->define_admin_hooks( $this->admin_class );
+		$this->define_public_hooks( $this->public_class );
 
 	}
 
@@ -138,13 +77,10 @@ class Gs_simplecrm {
 	 * @since    2.0.0
 	 * @access   private
 	 */
-	private function define_admin_hooks() {
-
-		$plugin_admin = new Gs_simplecrm_Admin( $this->get_plugin_name(), $this->get_version() );
+	private function define_admin_hooks( $plugin_admin ) {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-
 	}
 
 	/**
@@ -154,9 +90,7 @@ class Gs_simplecrm {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function define_public_hooks() {
-
-		$plugin_public = new Gs_simplecrm_Public( $this->get_plugin_name(), $this->get_version() );
+	private function define_public_hooks( $plugin_public ) {
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
@@ -173,17 +107,6 @@ class Gs_simplecrm {
 	}
 
 	/**
-	 * The name of the plugin used to uniquely identify it within the context of
-	 * WordPress and to define internationalization functionality.
-	 *
-	 * @since     2.0.0
-	 * @return    string    The name of the plugin.
-	 */
-	public function get_plugin_name() {
-		return $this->gs_simplecrm;
-	}
-
-	/**
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
 	 * @since     2.0.0
@@ -192,15 +115,11 @@ class Gs_simplecrm {
 	public function get_loader() {
 		return $this->loader;
 	}
-
-	/**
-	 * Retrieve the version number of the plugin.
-	 *
-	 * @since     2.0.0
-	 * @return    string    The version number of the plugin.
-	 */
-	public function get_version() {
-		return $this->version;
+	public function admin_class() {
+		return $this->admin_class;
+	}
+	public function public_class() {
+		return $this->public_class;
 	}
 
 }

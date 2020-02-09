@@ -2,7 +2,7 @@
 /*
 * Plugin Name: go-source Simple CRM
 *
-* all files and classes are named gs_simplecrm
+* Wordpress plugin  / all files and classes are named gs_simplecrm 
 *
 * @Version:          2.0.0
 * Requires PHP:      7.0 and above
@@ -29,50 +29,105 @@
 * https://codex.wordpress.org/Plugin_API
 *
 * Readme file has simplified instructions on how to use
-* Check the gs-simplecrm-doc.php in the plugin folder for system documentation
-* 
+* Check the gs-documentation.php in gsclasses folder for adittional documentation
 */
 
-// To switch code from WP or J!, a global variable is set herein
+//exit if accessed directly
+if (!defined('WPINC')) { exit; }
+
+// This global informs gs_classes to switch function return to WP or Joomla standard
 $gs_global = 'wp';
 
-//exit if accessed directly
-if( $gs_global == 'wp' ){ 
-	if (!defined('WPINC')) { exit; }
-} else { defined('_JEXEC') or die; }
-
-/**
- * Currently plugin version.
- * Rename this for your plugin and update it as you release new versions.
+/*
+	---------- all component setings, parameters and properties end here ---------- ------- -------
+ 
+ * Instanciate Go-Source class to construct all references
  */
-define( 'GS_SIMPLECRM_VERSION', '2.0.0' );
+ 
+if( $gs_global == 'wp' ) { require plugin_dir_path( __FILE__ ) . 'gsclasses/gs_class_component.php'; }
+ 
+/*
+* This function sets component properties, using a function to protect the variables
+* $component array carries the properties to instanciate the component
+* __construct() receives the properties trough this array
+*/
+function gs_prepare_component(){
+ 	$component_array = array(
+ 					'name' 	=> 'Simple CRM',	
+ 					'codename'	=> 'gs_simplecrm',
+ 					'cms'		=> $gs_global,
+	 				'version'			=> '2.0.0',
+	 				'copyright_year'	=> '2020',
+		 			'allow_backend'		=> 1,
+		 			'allow_frontend'	=> 1,
+		 			'allow_download'	=> 1,
+		 			'allow_upload'		=> 1,
+		 			'load_gs_classes'	=> 1,
+		 			'plugin_dir'		=> plugin_dir_path( __FILE__ )
+	 				);	 				
+	 	return $component_array;
+	}
+	$gsComponent = new gsComponent( gs_prepare_component() ); 
+ 
+/*
+	 ----------  all setings, parameters and component properties end here ---------- ------- -------
+	       ----         only WP instructions from this line down           ------
+*/
+ define( 'GS_SIMPLECRM_NAME', $gsComponent->name() );
+ define( 'GS_SIMPLECRM_CODENAME', $gsComponent->codename() );
+ define( 'GS_SIMPLECRM_VERSION', $gsComponent->version() );
+
+//require all wp plugin classes from /includes
+
+function require_plugin_classes(){
+	
+	//read file names
+	$requires = scandir( plugin_dir_path( __FILE__ ) . 'includes/' );
+	
+	//loop to require, install classes
+	foreach ( $requires as $require ) {
+		
+			//8 is the lenght of class-gs; check if the file is class-gs before loading
+			if(  substr($require, 0, 8) == 'class-gs' ) { 
+				
+				//include the file
+				require_once plugin_dir_path( __FILE__ ) . 'includes/'.$require;	
+			}
+	}
+}
+require_plugin_classes();
+
+//require all go-source classes for this plugin
+
+function require_gs_classes() {
+			
+	//read file names
+	$requires = scandir( plugin_dir_path( __FILE__ ) . 'gsclasses/' );
+			
+	//loop to require, install classes
+	foreach ( $requires as $require ) {
+				
+			//8 is the lenght of class-gs; check if the file is class-gs before loading
+			if(  substr($require, 0, 8) == 'gs_class' ) { 
+						
+				//include the file
+				require_once plugin_dir_path( __FILE__ ) . 'gsclasses/'.$require;	
+			}
+	}
+}
+require_gs_classes();
 
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-plugin-name-activator.php
  */
-function activate_gs_simplecrm() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-gs_simplecrm-activator.php';
-	Gs_simplecrm_Activator::activate();
-}
+register_activation_hook( __FILE__, 'activate_'.$gsComponent->codename() );
 
 /**
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-plugin-name-deactivator.php
  */
-function deactivate_gs_simplecrm() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-gs_simplecrm-deactivator.php';
-	Gs_simplecrm_Deactivator::deactivate();
-}
-
-register_activation_hook( __FILE__, 'activate_gs_simplecrm' );
-register_deactivation_hook( __FILE__, 'deactivate_gs_simplecrm' );
-
-/**
- * The core plugin class that is used to define internationalization,
- * admin-specific hooks, and public-facing site hooks.
- */
-require plugin_dir_path( __FILE__ ) . 'includes/class-gs_simplecrm.php';
+register_deactivation_hook( __FILE__, 'deactivate_'.$gsComponent->codename() );
 
 /**
  * Begins execution of the plugin.
@@ -92,7 +147,7 @@ function run_gs_simplecrm() {
 run_gs_simplecrm();
 
 /**
- * Sets de Admin Menu.
+ * gs_simplecrm_options_page() sets the admin page according to Admin Menu standard.
 	add_menu_page(
 	    string $page_title,
 	    string $menu_title,
@@ -101,20 +156,24 @@ run_gs_simplecrm();
 	    callable $function = '',
 	    string $icon_url = '',
 	    int $position = null
+	    position 
 	);
  *
  * @since    2.0.0
  */
-	function gs_simplecrm_options_page() {
+	function gs_admin_page() {
+		$gs_admin_page_title = __( 'GS Simple CRM Config', GS_SIMPLECRM_CODENAME );
+		$gs_admin_menu_title = __( 'Simple CRM Cfg', GS_SIMPLECRM_CODENAME );
+		
 	    add_menu_page(
-	        'GS Simple CRM Config',
-	        'Simple CRM Cfg',
+	        $gs_admin_page_title,
+	        $gs_admin_menu_title,
 	        'manage_options',
-	        plugin_dir_path(__FILE__) . 'admin/partials/gs_simplecrm-admin-display.php',
+	        plugin_dir_path(__FILE__) . 'admin/view/'.GS_SIMPLECRM_CODENAME.'-admin-view.php', 
 	        null,
-	        plugin_dir_url(__FILE__) . 'images/gs_icon.png',
+	        plugin_dir_url(__FILE__) . 'images/gs_wp_admin_menu_icon.png',
 	        20
 	    );
 	}
-	add_action( 'admin_menu', 'gs_simplecrm_options_page' );
+	add_action( 'admin_menu', 'gs_admin_page' );
 

@@ -54,23 +54,41 @@ https://developer.wordpress.org/apis/handbook/filesystem/
 https://developer.wordpress.org/plugins/plugin-basics/
 Plugin API: https://codex.wordpress.org/Plugin_API
 
-@ Credits: 	WP plugin leverages WordPress Plugin Boilerplate; It based on the Plugin API, Coding Standards and Documentation Standards. 
+@ Credits: 	WP plugin leverages WordPress Plugin Boilerplate; with some function changes and folder name simplification.
+			This plugin follows most Coding Standards and Documentation Standards, exeption exist in particular when using camel case. 
 			The WordPress Plugin Boilerplate was started in 2011 by [Tom McFarlin](http://twitter.com/tommcfarlin/).
 			In March of 2015 the project was handed over by Tom to Devin Vinson.
 			The current version was developed in conjunction with [Josh Eaton](https://twitter.com/jjeaton), 
 			[Ulrich Pogson](https://twitter.com/grapplerulrich), and [Brad Vincent](https://twitter.com/themergency).
 			It is hosted on GitHub https://github.com/DevinVinson/WordPress-Plugin-Boilerplate
 
- --- Component/Plug-in methods ---
+ --- Component/Plugin methods ---
  
- To switch code from WP or J!, a global variable is set to $gs_global = 'wp'; or $gs_global = 'j4';
- it requires Wordpress version 5.3 or Joomla! version 4.0. The gsConfig class checks the version and may update $gs_global 
+ To switch code from WP or Joomla, a global variable is set to $gs_global = 'wp'; or $gs_global = 'j4';
+ it requires Wordpress version 5.3 or Joomla! version 4.0 and above.
 
- * Language, translation and internationalization
+ ** gsComponent class properties are passead then instantiating at install (1st php file)
+
+ example:	$component_array = array(
+ 					'name' 		=> 'long name as printed in titles',	
+ 					'codename'	=> 'gs_simplecrm',
+ 					'cms'		=> $gs_global,
+	 				'version'			=> '2.0.0',
+	 				'copyright_year'	=> '2020',
+		 			'allow_backend'		=> 1,
+		 			'allow_frontend'	=> 1,
+		 			'allow_download'	=> 1,
+		 			'allow_upload'		=> 1,
+		 			'load_gs_classes'	=> 1
+	 				);	 				
+	$gsComponent = new gsComponent( $component_array );
+
+ ** Language, translation and internationalization
+ 
  WP uses:  __( 'Blog Options', 'my-plugin' );
- J! uses: JText::_('TRANSLATABLE_STRING');
- Class gsLanguage handles replacement for WP or J! strings; it also handles some string filters unique to go-source software.
- The method: gsLanguage::txt('string') returns a WP or J! string according to $gs_global
+ J4 uses: JText::_('TRANSLATABLE_STRING');
+ Class gsLanguage handles replacement for wp or j4 strings; in addition, it may handle string filters unique to go-source software.
+ The method: gsLanguage::txt('string') returns a wp or j4 string according to the request
 
 
 

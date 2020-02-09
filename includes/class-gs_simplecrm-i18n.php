@@ -1,17 +1,15 @@
 <?php
 
 /**
- * Define the internationalization functionality
- *
  * Wordpress plugin
  *
+ * Define the internationalization functionality
+ *
  * @package    gs_simplecrm
- * @subpackage gs_simplecrm/admin
  * @author     Pedro Bicudo Maschio <bicudomaschio@gmail.com>
  * @since      2.0.0
  */
 class Gs_simplecrm_i18n {
-
 
 	/**
 	 * Load the plugin text domain for translation.
@@ -21,13 +19,9 @@ class Gs_simplecrm_i18n {
 	public function load_plugin_textdomain() {
 
 		load_plugin_textdomain(
-			'gs_simplecrm',
+			GS_SIMPLECRM_CODENAME,
 			false,
-			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
+			dirname( dirname( plugin_basename( __FILE__ ) ) ) . 'languages/'
 		);
-
 	}
-
-
-
 }

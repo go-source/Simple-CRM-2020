@@ -1,12 +1,11 @@
 <?php
 
 /**
- * Register all actions and filters for the plugin
- *
  * Wordpress plugin
  *
+ * Register all actions and filters for the plugin
+ *
  * @package    gs_simplecrm
- * @subpackage gs_simplecrm/admin
  * @author     Pedro Bicudo Maschio <bicudomaschio@gmail.com>
  * @since      2.0.0
  *
@@ -76,8 +75,7 @@ class Gs_simplecrm_Loader {
 	}
 
 	/**
-	 * A utility function that is used to register the actions and hooks into a single
-	 * collection.
+	 * A utility function that is used to register the actions and hooks into a single collection.
 	 *
 	 * @since    2.0.0
 	 * @access   private
@@ -100,7 +98,6 @@ class Gs_simplecrm_Loader {
 		);
 
 		return $hooks;
-
 	}
 
 	/**
@@ -117,7 +114,5 @@ class Gs_simplecrm_Loader {
 		foreach ( $this->actions as $hook ) {
 			add_action( $hook['hook'], array( $hook['component'], $hook['callback'] ), $hook['priority'], $hook['accepted_args'] );
 		}
-
 	}
-
 }
