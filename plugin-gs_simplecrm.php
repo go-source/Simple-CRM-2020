@@ -14,7 +14,7 @@
 * 
 * Author URI:  https://pmoft.com
 * Plugin URI:  https://go-source.com
-* Text Domain: gs_simplecrm-basics-plugin
+* Text Domain: gs-simplecrm
 * Domain Path: /languages
 * 
 * Joomla Header
@@ -35,7 +35,8 @@
 //exit if accessed directly
 if (!defined('WPINC')) { exit; }
 
-// This global informs gs_classes to switch function return to WP or Joomla standard
+// This global informs gs_classes to switch function; it sets WP or Joomla standards
+global $gs_global;
 $gs_global = 'wp';
 
 /*
@@ -57,7 +58,7 @@ function gs_prepare_component(){
  					'codename'	=> 'gs_simplecrm',
  					'cms'		=> $gs_global,
 	 				'version'			=> '2.0.0',
-	 				'copyright_year'	=> '2020',
+	 				'copyright_year'	=> '2021',
 		 			'allow_backend'		=> 1,
 		 			'allow_frontend'	=> 1,
 		 			'allow_download'	=> 1,
@@ -71,13 +72,14 @@ function gs_prepare_component(){
  
 /*
 	 ----------  all setings, parameters and component properties end here ---------- ------- -------
+	 
 	       ----         only WP instructions from this line down           ------
 */
  define( 'GS_SIMPLECRM_NAME', $gsComponent->name() );
  define( 'GS_SIMPLECRM_CODENAME', $gsComponent->codename() );
  define( 'GS_SIMPLECRM_VERSION', $gsComponent->version() );
 
-//require all wp plugin classes from /includes
+//require all wp plugin classes from /includes   --- --- --- --- ---
 
 function require_plugin_classes(){
 	
@@ -97,7 +99,7 @@ function require_plugin_classes(){
 }
 require_plugin_classes();
 
-//require all go-source classes for this plugin
+//require all go-source classes for this plugin --- --- --- --- ---
 
 function require_gs_classes() {
 			
@@ -107,7 +109,7 @@ function require_gs_classes() {
 	//loop to require, install classes
 	foreach ( $requires as $require ) {
 				
-			//8 is the lenght of class-gs; check if the file is class-gs before loading
+			// 8 is the lenght of class-gs; check if the file is class-gs before loading
 			if(  substr($require, 0, 8) == 'gs_class' ) { 
 						
 				//include the file
@@ -147,33 +149,35 @@ function run_gs_simplecrm() {
 run_gs_simplecrm();
 
 /**
- * gs_simplecrm_options_page() sets the admin page according to Admin Menu standard.
-	add_menu_page(
-	    string $page_title,
-	    string $menu_title,
-	    string $capability,
-	    string $menu_slug,
-	    callable $function = '',
-	    string $icon_url = '',
-	    int $position = null
-	    position 
-	);
- *
- * @since    2.0.0
- */
-	function gs_admin_page() {
-		$gs_admin_page_title = __( 'GS Simple CRM Config', GS_SIMPLECRM_CODENAME );
-		$gs_admin_menu_title = __( 'Simple CRM Cfg', GS_SIMPLECRM_CODENAME );
+* gs_simplecrm_options_page() sets the admin page according to Admin Menu standard.
+		add_menu_page(
+		    string $page_title,
+		    string $menu_title,
+		    string $capability,
+		    string $menu_slug,
+		    callable $function = '',
+		    string $icon_url = '',
+		    int $position = null
+		    position 
+		);
+*
+* @since    2.0.0
+*/
+	function gs_simplecrm_admin_page() {
 		
-	    add_menu_page(
+		$gs_admin_page_title = __( 'GS Simple CRM Config', 'gs-simplecrm' );				//Page Title
+		$gs_admin_menu_title = __( 'Simple CRM Cfg', 'gs-simplecrm' );						//Menu Title
+				
+	    $hookname = add_menu_page(
 	        $gs_admin_page_title,
 	        $gs_admin_menu_title,
-	        'manage_options',
-	        plugin_dir_path(__FILE__) . 'admin/view/'.GS_SIMPLECRM_CODENAME.'-admin-view.php', 
-	        null,
-	        plugin_dir_url(__FILE__) . 'images/gs_wp_admin_menu_icon.png',
-	        20
+	        'manage_options',																	//Capability
+	        plugin_dir_path(__FILE__) . 'admin/view/'.GS_SIMPLECRM_CODENAME.'-admin-view.php',	//Menu Slug 
+	        null,																				//Callable $function
+	        plugin_dir_url(__FILE__) . 'images/gs_wp_admin_menu_icon.png',						//Menu icon
+	        20																					//position
 	    );
+	    add_action( 'load-' . $hookname, 'gs_simplecrm_options_page_submit' );
 	}
-	add_action( 'admin_menu', 'gs_admin_page' );
+	add_action( 'admin_menu', 'gs_simplecrm_admin_page' );
 

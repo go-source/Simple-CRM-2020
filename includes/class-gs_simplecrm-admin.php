@@ -9,12 +9,13 @@
  * @author     Pedro Bicudo Maschio <bicudomaschio@gmail.com>
  * @since      2.0.0
  */
-class Gs_simplecrm_Admin {
+class Gs_simplecrm_Admin {      // adds css and js
 	
 	protected $gs_admin_view_name;
 
 	public function __construct() {
 		$this->gs_admin_view_name = GS_SIMPLECRM_NAME.'-admin';
+		
 		$this->enqueue_styles();
 		$this->enqueue_scripts();
 	}
@@ -64,15 +65,5 @@ class Gs_simplecrm_Admin {
 
 	}
 	
-	/**
-	 * gs_simplecrm_admin_view_data function. Load data for the config view
-	 * 
-	 * @access public
-	 * @return void
-	 */
-	function gs_simplecrm_admin_view_data() {
-		$config_array = array();
-		$data_array = array();
-	}
 
 }

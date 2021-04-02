@@ -28,14 +28,30 @@ class gsLanguage {
 	
 	protected $lang_name;
 	
-	public function __construct() {
+	public function __construct($lan = "") {
 		
-		$this->lang_name = "Hi. Lang object construct success";
+		if( $lan == 'pt-BR' ) {
+			
+			$this->lang_name = "Português do Brasil";
+		}
+		else{
+			$this->lang_name = "Hi. Lang object construct success";
+		}
+		
 	}
 	
 	//provide class properties
 	public function lang_name() {
 		return $this->lang_name;
+	}
+	
+	//choose Wp or J4 translation method - function does not work; can't pass back the string to wp
+	public function set( $string ) {
+		global $gs_global;
+		
+		if( $gs_global == 'wp' ) {
+			return __( $string , 'gs-simplecrm');
+		}
 	}
 	
 }

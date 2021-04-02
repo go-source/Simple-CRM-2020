@@ -12,9 +12,10 @@
 * 
 * --- CHANGELOG ---
 *
-*	- Version starts with 2.0.0
-*		Previous version was created for Joomla! 3.8 using libraries that need replacement
-*		New version 2.0.0 developed for WP and later adapted for Joomla!
+*- Version starts with 2.0.0
+*  Previous version was created for Joomla! 3.8 using libraries that need replacement
+*  2020: New version 2.0.0 developed for WP and later adapted for Joomla!
+*  2021: suspend the WP development to focus on Joomla!
 *
   --- Architecture and tools references --- knowledge available on Jan/2020 ---
  
@@ -79,7 +80,8 @@ Plugin API: https://codex.wordpress.org/Plugin_API
 		 			'allow_frontend'	=> 1,
 		 			'allow_download'	=> 1,
 		 			'allow_upload'		=> 1,
-		 			'load_gs_classes'	=> 1
+		 			'load_gs_classes'	=> 1,
+		 			'plugin_dir'		=> plugin_dir_path( __FILE__ )
 	 				);	 				
 	$gsComponent = new gsComponent( $component_array );
 
@@ -90,6 +92,9 @@ Plugin API: https://codex.wordpress.org/Plugin_API
  Class gsLanguage handles replacement for wp or j4 strings; in addition, it may handle string filters unique to go-source software.
  The method: gsLanguage::txt('string') returns a wp or j4 string according to the request
 
+NEXT:
+- change add admin view to class? Or new instance call in the view?
+- include admin submenu https://developer.wordpress.org/plugins/administration-menus/sub-menus/
 
 
 
