@@ -6,8 +6,8 @@
 * Defines the component or plugin properties (and configuration)
 * 
 * @Version 2.0.0
-* @copyright  2020 Pedro Bicudo Maschio
-* @license    GNU General Public License version 2 or later; see LICENSE.txt 
+* @copyright 2021 Pedro Bicudo Maschio
+* @license   GNU General Public License version 2 or later; see LICENSE.txt 
 * 
 * Framework by go-source.com / pmoft.com
 * Contact: bicudomaschio@gmail.com
@@ -36,6 +36,7 @@ Class gsComponent {
 	protected $allow_upload;
 	protected $load_gs_classes;
 	protected $plugin_dir;
+	
 	/**
 	 * __construct function.
 	 * 
@@ -64,31 +65,31 @@ Class gsComponent {
 	public function name(){
 		return $this->name;
 		}
-	public function codename(){
+	public function gs_codename(){
 		return $this->codename;
 		}
-	public function version(){
+	public function gs_version(){
 		return $this->version;
 		}
-	public function copyright_year(){
+	public function gs_copyright_year(){
 		return $this->copyright_year;
 		}
-	public function allow_backend(){
+	public function gs_allow_backend(){
 		return $this->allow_backend	;
 		}
-	public function allow_frontend(){
+	public function gs_allow_frontend(){
 		return $this->allow_frontend;
 		}
-	public function allow_download(){
+	public function gs_allow_download(){
 		return $this->allow_download;
 		}
-	public function allow_upload(){
+	public function gs_allow_upload(){
 		return $this->allow_upload;
 		}
-	public function load_gs_classes(){
+	public function gs_load_classes(){
 		return $this->load_gs_classes;
 		}
-	public function plugin_dir(){
+	public function gs_plugin_dir(){
 		return $this->plugin_dir;
 		}
 		

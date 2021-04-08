@@ -2,9 +2,9 @@
 /*
 * @Version: 2.0.0
 * version number applies to both Wordpress plug-in and Joomla component or package
-* Requires PHP: 7.1 and above
+* Requires PHP: 7.4 and above
 * Requires at least: 5.2 (WP)
-* At least Joompla 4.0
+* At least Joompla 3.9
 * 
 * Description: Helper class; language switch allows for updating CMS methods. This class handles translation and text/strings methods.
 *
@@ -28,6 +28,8 @@ class gsLanguage {
 	
 	protected $lang_name;
 	
+	//ideally, the application will select language based on user preference, browser or other.
+	
 	public function __construct($lan = "") {
 		
 		if( $lan == 'pt-BR' ) {
@@ -35,18 +37,18 @@ class gsLanguage {
 			$this->lang_name = "Português do Brasil";
 		}
 		else{
-			$this->lang_name = "Hi. Lang object construct success";
+			$this->lang_name = "Hi. Lang object construct was successful";
 		}
 		
 	}
 	
 	//provide class properties
-	public function lang_name() {
+	public function gs_lang_name() {
 		return $this->lang_name;
 	}
 	
 	//choose Wp or J4 translation method - function does not work; can't pass back the string to wp
-	public function set( $string ) {
+	public function gs_translate( $string ) {
 		global $gs_global;
 		
 		if( $gs_global == 'wp' ) {

@@ -15,6 +15,8 @@
 
 if ( is_admin() ) {
     // we are in admin mode, continue. If not admin, no page content 
+    
+    // IMPORTANT - some strings not prepared for translation - needs fixing 
 ?>
 	<div class="wrap">
       
@@ -50,7 +52,7 @@ if ( is_admin() ) {
 					
 					$user_name = __( 'User name:' , 'gs-simplecrm');
 					
-					echo __( 'lang test: - ', 'gs-simplecrm').$lang->lang_name().'<br>'.$user_name.' '.$user->display_name.'<br> filter '.current_filter() ;
+					echo __( 'lang test: - ', 'gs-simplecrm').$lang->gs_lang_name().'<br>'.$user_name.' '.$user->display_name.'<br> filter '.current_filter() ;
 					//echo '<br>'.print_r($response).'<br>';
 					//echo '<pre>'; print_r( _get_cron_array() ); echo '</pre>';
 					echo __( 'what else should I translate', 'gs-simplecrm' ) ;

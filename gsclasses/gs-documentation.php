@@ -4,8 +4,8 @@
 * This is a documentation file. No working code here.
 * 
 * @Version 2.0.0
-* @copyright  2020 Pedro Bicudo Maschio
-* @license    GNU General Public License version 2 or later; see LICENSE.txt 
+* @copyright 2021 Pedro Bicudo Maschio
+* @license   GNU General Public License version 2 or later; see LICENSE.txt 
 * 
 * Simple-CRM for Wordpress and Joomla! by go-source.com / pmoft.com
 * Contact: bicudomaschio@gmail.com
@@ -43,7 +43,7 @@ or at least only use the built-in implementation as a fallback for when the PWA 
  --- Learn WP 2020 - quick reference guide ---
 
 WP language: Network is the master site. Network has blogs (each site is a blog). Users have capabilities. 
-User caoabilities is similar to Joomla's ACL
+User capabilities is similar to Joomla's ACL
 WP key functions include hooks: actions and filters
  
 * References - 
@@ -66,7 +66,7 @@ Plugin API: https://codex.wordpress.org/Plugin_API
  --- Component/Plugin methods ---
  
  To switch code from WP or Joomla, a global variable is set to $gs_global = 'wp'; or $gs_global = 'j4';
- it requires Wordpress version 5.3 or Joomla! version 4.0 and above.
+ it requires Wordpress version 5.3 or Joomla! version 3.9 and above. Developed with PHP 7.4,
 
  ** gsComponent class properties are passead then instantiating at install (1st php file)
 
@@ -75,7 +75,7 @@ Plugin API: https://codex.wordpress.org/Plugin_API
  					'codename'	=> 'gs_simplecrm',
  					'cms'		=> $gs_global,
 	 				'version'			=> '2.0.0',
-	 				'copyright_year'	=> '2020',
+	 				'copyright_year'	=> '2021',
 		 			'allow_backend'		=> 1,
 		 			'allow_frontend'	=> 1,
 		 			'allow_download'	=> 1,
@@ -95,6 +95,8 @@ Plugin API: https://codex.wordpress.org/Plugin_API
 NEXT:
 - change add admin view to class? Or new instance call in the view?
 - include admin submenu https://developer.wordpress.org/plugins/administration-menus/sub-menus/
+
+-*- -*- Joomla Component -*- -*-
 
 
 
