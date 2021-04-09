@@ -5,9 +5,9 @@
 * Wordpress plugin  / all files and classes are named gs_simplecrm 
 *
 * @Version:          2.0.0
-* Requires PHP:      7.4 and above
+* Requires PHP:      7.0 and above
 * Requires at least: 5.3 (WP)
-* At least Joompla   3.9
+* At least Joompla   4.0
 * Author:            go-source
 * 
 * Description: Simple CRM has all functions for sales pipeline management. It is free and easy to extend. Our purpose is to translate complexity into knowledge that is shared to promote social wealth, though systems that are easy to use. Simple-CRM makes our sales knowledge available to you.
@@ -20,7 +20,7 @@
 * Joomla Header
 * @package    com_gs_simplecrm
 * @author     Pedro Bicudo Maschio <bicudomaschio@gmail.com>
-* @copyright  2021 Pedro Bicudo Maschio
+* @copyright  2020 Pedro Bicudo Maschio
 * @license    GNU General Public License version 2 or later; see LICENSE.txt 
 * License URI: https://www.gnu.org/licenses/gpl-2.0.html
 *
@@ -45,7 +45,7 @@ $gs_global = 'wp';
  * Instanciate Go-Source class to construct all references
  */
  
-if( $gs_global == 'wp' ) { require plugin_dir_path( __FILE__ ) . 'gsclasses/gs_class_component.php'; }
+if( $gs_global == 'wp' ) { require plugin_dir_path( __FILE__ ) . 'assets/gsclasses/gs_class_component.php'; }
  
 /*
 * This function sets component properties, using a function to protect the variables
@@ -54,9 +54,9 @@ if( $gs_global == 'wp' ) { require plugin_dir_path( __FILE__ ) . 'gsclasses/gs_c
 */
 function gs_prepare_component(){
  	$component_array = array(
- 					'name' 	            => 'Simple CRM',	
- 					'codename'	        => 'gs_simplecrm',
- 					'cms'		        => $gs_global,
+ 					'name' 	=> 'Simple CRM',	
+ 					'codename'	=> 'gs_simplecrm',
+ 					'cms'		=> $gs_global,
 	 				'version'			=> '2.0.0',
 	 				'copyright_year'	=> '2021',
 		 			'allow_backend'		=> 1,
@@ -104,7 +104,7 @@ require_plugin_classes();
 function require_gs_classes() {
 			
 	//read file names
-	$requires = scandir( plugin_dir_path( __FILE__ ) . 'gsclasses/' );
+	$requires = scandir( plugin_dir_path( __FILE__ ) . 'assets/gsclasses/' );
 			
 	//loop to require, install classes
 	foreach ( $requires as $require ) {
@@ -113,7 +113,7 @@ function require_gs_classes() {
 			if(  substr($require, 0, 8) == 'gs_class' ) { 
 						
 				//include the file
-				require_once plugin_dir_path( __FILE__ ) . 'gsclasses/'.$require;	
+				require_once plugin_dir_path( __FILE__ ) . 'assets/gsclasses/'.$require;	
 			}
 	}
 }
