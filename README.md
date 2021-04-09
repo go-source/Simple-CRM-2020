@@ -1,6 +1,6 @@
-# Simple-CRM for Wordpress and Joomla!
+# Simple-CRM for Wordpress and Joomla! Archived
 
-Description: Simple CRM has all functions for sales pipeline management. It is free and easy to extend. Our purpose is to translate complexity into knowledge that is shared to promote social wealth, though systems that are easy to use. Simple-CRM makes our sales knowledge available to you.
+Description: the idea was to create a component to run in both platforms. Simple CRM for Joomla has all functions for sales pipeline management. It is free and easy to extend. Our purpose is to translate complexity into knowledge that is shared to promote social wealth, though systems that are easy to use. Simple-CRM makes our sales knowledge available to you.
 
 ## This project started in January 2020. It is not functional at this point
 
