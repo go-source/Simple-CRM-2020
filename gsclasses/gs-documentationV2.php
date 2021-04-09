@@ -96,8 +96,31 @@ NEXT:
 - change add admin view to class? Or new instance call in the view?
 - include admin submenu https://developer.wordpress.org/plugins/administration-menus/sub-menus/
 
+<<<<<<< Updated upstream:gsclasses/gs-documentation.php
 
 
+=======
+-*- -*- Joomla Component -*- -*-
+framework - tutorial in https://docs.joomla.org/J3.x:Developing_an_MVC_Component/Developing_a_Basic_Component
+1 	helloworld.xml 			this is an XML (manifest) file that tells Joomla! how to install our component.
+2 	assets/helloworld.php 	this is the site entry point to the Hello World! component
+3 	assets/index.html 		prevents web server from listing directory content
+	assets/gsclasses
+	assets/controllers
+	assets/models
+	assets/views
+	assets/js
+	assets/images
+	assets/css
+4 	j4_admin/index.html 		prevents web server from listing directory content
+5 	j4_admin/helloworld.php 	this is the administrator entry point to the Hello World! component
+6 	j4_admin/sql/index.html 	prevents web server from listing directory content
+7 	j4_admin/sql/updates/index.html 		prevents web server from listing directory content
+8 	j4_admin/sql/updates/mysql/index.html 	prevents web server from listing directory content
+9 	j4_admin/sql/updates/mysql/0.0.1.sql 	file allowing to initialise schema version of the com_helloworld component. 
+
+in GitHub, the folders are precede by j4_ to separate Joomla! and Wordpress folders. Example /j4_site/
+>>>>>>> Stashed changes:assets/gsclasses/gs-documentation.php
 
 
 

@@ -61,7 +61,7 @@ Class gsComponent {
 	
 	// functions to retrieve the component properties
 		
-	public function name(){
+	public function gs_name(){
 		return $this->name;
 		}
 	public function codename(){

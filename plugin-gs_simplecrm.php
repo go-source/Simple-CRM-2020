@@ -45,7 +45,7 @@ $gs_global = 'wp';
  * Instanciate Go-Source class to construct all references
  */
  
-if( $gs_global == 'wp' ) { require plugin_dir_path( __FILE__ ) . 'gsclasses/gs_class_component.php'; }
+if( $gs_global == 'wp' ) { require plugin_dir_path( __FILE__ ) . 'assets/gsclasses/gs_class_component.php'; }
  
 /*
 * This function sets component properties, using a function to protect the variables
@@ -104,7 +104,7 @@ require_plugin_classes();
 function require_gs_classes() {
 			
 	//read file names
-	$requires = scandir( plugin_dir_path( __FILE__ ) . 'gsclasses/' );
+	$requires = scandir( plugin_dir_path( __FILE__ ) . 'assets/gsclasses/' );
 			
 	//loop to require, install classes
 	foreach ( $requires as $require ) {
@@ -113,7 +113,7 @@ function require_gs_classes() {
 			if(  substr($require, 0, 8) == 'gs_class' ) { 
 						
 				//include the file
-				require_once plugin_dir_path( __FILE__ ) . 'gsclasses/'.$require;	
+				require_once plugin_dir_path( __FILE__ ) . 'assets/gsclasses/'.$require;	
 			}
 	}
 }
